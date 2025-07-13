@@ -1,4 +1,11 @@
+using System.Diagnostics;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
+
+using System.Windows.Forms;
+using System.Windows.Interop;
+using System.Collections.Generic;
+using Microsoft.VisualBasic;
 
 namespace ExileToolbox_UI.Views
 {
@@ -7,6 +14,80 @@ namespace ExileToolbox_UI.Views
         public MainWindow()
         {
             InitializeComponent();
+
+
+
+
+
+
+            //this.WindowState = WindowState.Minimized;
+
+
+            //trayIcon = new NotifyIcon()
+            //{
+            //    Icon = new System.Drawing.Icon("Assets/ExileToolboxLogo_SystemTray.ico"),
+            //    Visible = true,
+            //    Text = "Exile Toolbox"
+            //};
+
+            //var trayIcon_ContextMenu = new ContextMenuStrip();
+            //trayIcon_ContextMenu.Items.Add("Show", null, (s, e) => ShowFromTray());
+            //trayIcon_ContextMenu.Items.Add("Exit", null, (s, e) => ExitApp());
+            //trayIcon.ContextMenuStrip = trayIcon_ContextMenu;
+
+            //trayIcon.DoubleClick += (s, e) => ShowFromTray();
+
+
+            
+
+
         }
+
+        // Overwriting the OnClosing event to instead minimize the application window to the system tray
+        protected override void OnClosing(WindowClosingEventArgs e)
+        {
+            base.OnClosing(e);
+
+            e.Cancel = true;
+            this.Hide();
+        }
+
+        
+        public void LeaguePicker_SetItems(List<string> leagues)
+        {
+            LeaguePicker.ItemsSource = leagues;
+        }
+
+        //private void CalculateButton_OnClick(object? sender, RoutedEventArgs e)
+        //{
+        //    Debug.WriteLine("Click!");
+        //    Debug.WriteLine($"Click! Celsius={Celsius.Text}");
+
+        //    if (Celsius.Text != string.Empty)
+        //    {
+        //        Fahrenheit.Text = Celsius.Text;
+        //    }
+        //    else
+        //    {
+        //        Celsius.Text = string.Empty;
+        //        Fahrenheit.Text = string.Empty;
+        //    }
+        //}
+
+        //private void CalculateTemp(object? sender, RoutedEventArgs e)
+        //{
+        //    if (double.TryParse(Celsius.Text, out var C))
+        //    {
+        //        var F = C * (9d / 5d) + 32;
+        //        Fahrenheit.Text = F.ToString("0.0");
+        //    }
+        //    else
+        //    {
+        //        Celsius.Text = string.Empty;
+        //        Fahrenheit.Text= string.Empty;
+        //    }
+        //}
+
+
     }
 }

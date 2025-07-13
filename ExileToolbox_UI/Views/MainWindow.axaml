@@ -3,11 +3,14 @@
         xmlns:vm="using:ExileToolbox_UI.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
         x:Class="ExileToolbox_UI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="ExileToolbox_UI">
+        Icon="/Assets/ExileToolboxLogo_SystemTray.ico"
+        Title="ExileToolbox"
+		Width="400"
+		Height="450"
+		Background="#333333">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
@@ -20,11 +23,57 @@
 	<TextBlock Text="some text" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 	-->
 
+	<!--
 	<StackPanel>
-		<Border Margin="5" Background="Aquamarine" CornerRadius="10" Width="100">
-		    <TextBlock HorizontalAlignment="Center">TextBlock1</TextBlock>
+		<Border Margin="5" Background="Aquamarine" CornerRadius="10">
+		    <TextBlock HorizontalAlignment="Center" 
+					   FontSize="24"
+					   Margin="5"
+					   Text="SomeText">
+				
+			</TextBlock>
 		</Border>
 	    <Button HorizontalAlignment="Center">HelloButton</Button>
 	</StackPanel>
-	
+	-->
+
+	<!--
+	<StackPanel>
+		<Border Margin="5" Background="#446285" CornerRadius="10">
+			<TextBlock HorizontalAlignment="Center"
+					   FontSize="24"
+					   Margin="5"
+					   Text="ExileToolbox"
+					   Foreground="White">
+			</TextBlock>
+		</Border>
+		<Grid ShowGridLines="False" Margin="5"
+			  ColumnDefinitions="120, 100"
+			  RowDefinitions="Auto, Auto, Auto">
+			<Label Grid.Row="0" Grid.Column="0" Margin="5" Foreground="Black">Celsius</Label>
+			<TextBox Name="Celsius" Grid.Row="0" Grid.Column="1" Margin="0 5" BorderBrush="Black" TextChanged="CalculateTemp"/>
+			<Label Grid.Row="1" Grid.Column="0" Margin="5" Foreground="Black">Fahrenheit</Label>
+			<TextBox Name="Fahrenheit" IsReadOnly="True" Grid.Row="1" Grid.Column="1" Margin="0 5" BorderBrush="Black"/>
+			<Button Grid.Row="2" Grid.Column="1" Click="CalculateButton_OnClick">Calculate</Button>
+		</Grid>
+		<Button HorizontalAlignment="Center">HelloButton</Button>
+	</StackPanel>
+	-->
+
+	<StackPanel>
+		<TextBlock HorizontalAlignment="Center"
+				   FontSize="20"
+				   Margin="5"
+				   Text="ExileToolbox"
+				   Foreground="White">
+			
+		</TextBlock>
+		<ComboBox Name="LeaguePicker" Margin="10" SelectedIndex="0" MaxDropDownHeight="200">
+			<ComboBoxItem>Standard</ComboBoxItem>
+		</ComboBox>
+		
+		
+	</StackPanel>
+
+
 </Window>

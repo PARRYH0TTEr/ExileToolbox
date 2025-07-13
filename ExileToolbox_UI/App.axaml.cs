@@ -1,5 +1,8 @@
+using System;
 using System.Linq;
+using System.Windows;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
@@ -9,8 +12,13 @@ using ExileToolbox_UI.Views;
 
 namespace ExileToolbox_UI
 {
-    public partial class App : Application
+    public partial class App : Avalonia.Application
     {
+
+        private MainWindow? _mainWindow;
+
+        private DateTime? _trayTimeClick;
+
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
@@ -23,10 +31,13 @@ namespace ExileToolbox_UI
                 // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
                 // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
                 DisableAvaloniaDataAnnotationValidation();
-                desktop.MainWindow = new MainWindow
-                {
-                    DataContext = new MainWindowViewModel(),
-                };
+
+                // Uncomment this block if you want to show the ExileToolbox window on startup
+                //
+                //desktop.MainWindow = new MainWindow
+                //{
+                //    DataContext = new MainWindowViewModel(),
+                //};
             }
 
             base.OnFrameworkInitializationCompleted();
@@ -44,5 +55,53 @@ namespace ExileToolbox_UI
                 BindingPlugins.DataValidators.Remove(plugin);
             }
         }
+
+
+        // Show (and initialize) the ExileToolbox window
+        private void SystemTray_SettingsClick(object? sender, System.EventArgs e)
+        {
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                if (_mainWindow == null)
+                {
+                    _mainWindow = new MainWindow()
+                    {
+                        DataContext = new MainWindowViewModel()
+                    };
+                    desktop.MainWindow = _mainWindow;
+                }
+
+                if (!_mainWindow.IsVisible)
+                {
+                    _mainWindow.Show();
+                }
+                else
+                {
+                    _mainWindow.Activate();
+                }
+            }
+        }
+
+        // Exit the application
+        private void SystemTray_ExitClick(object? sender, System.EventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+
+        private void OnTrayClicked(object? sender, EventArgs e)
+        {
+            if (_trayTimeClick == null)
+            {
+                _trayTimeClick = DateTime.Now;
+                return;
+            }
+
+            var delta = (DateTime.Now - _trayTimeClick).Value;
+            
+
+
+        }
+
     }
 }

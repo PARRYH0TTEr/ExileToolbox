@@ -12,4 +12,19 @@
     <Application.Styles>
         <FluentTheme />
     </Application.Styles>
+
+	<TrayIcon.Icons>
+		<TrayIcons>
+			<TrayIcon Icon="/Assets/ExileToolboxLogo_SystemTray.ico"
+					  ToolTipText="ExileToolbox">
+				<TrayIcon.Menu>
+					<NativeMenu>
+						<NativeMenuItem Header="Settings" Click="SystemTray_SettingsClick"/>
+						<NativeMenuItem Header="Exit" Click="SystemTray_ExitClick"/>
+					</NativeMenu>
+				</TrayIcon.Menu>
+			</TrayIcon>
+		</TrayIcons>
+	</TrayIcon.Icons>
+	
 </Application>
