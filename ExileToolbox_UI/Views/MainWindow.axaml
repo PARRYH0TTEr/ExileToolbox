@@ -68,10 +68,24 @@
 				   Foreground="White">
 			
 		</TextBlock>
-		<ComboBox Name="LeaguePicker" Margin="10" SelectedIndex="0" MaxDropDownHeight="200">
-			<ComboBoxItem>Standard</ComboBoxItem>
+		<ComboBox Name="LeaguePicker" 
+				  Margin="10" 
+				  SelectedIndex="0" 
+				  MaxDropDownHeight="200">
 		</ComboBox>
-		
+
+		<!--
+		<ListBox ItemsSource="{Binding tempLeagueList2}" />
+		-->
+
+		<Button Margin="5" Click="TESTING_ShowPriceCheckWindow" Foreground="White">
+			Open PriceCheck Window
+		</Button>
+
+		<Button Margin="5" Click="TESTING_UpdatPriceCheckWindowBinding" Foreground="White">
+			Set PriceCheck ItemListing Binding
+		</Button>
+
 		
 	</StackPanel>
 

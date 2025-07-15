@@ -168,7 +168,7 @@ namespace ExileToolbox.Util
 
 
         // Given a FetchRequest, format the trade site url with the request-id and selected league
-        public static string FormatTradeSearchUrl(FetchRequest fRequest)
+        public static string FormatTradeSearchUrl(FetchingInfo fRequest)
         {
             return $"{Constants.POE2_TRADE_Search}/{selectedLeague}/{fRequest.Id}";
         }

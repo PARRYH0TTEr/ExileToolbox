@@ -17,6 +17,8 @@ namespace ExileToolbox_UI
 
         private MainWindow? _mainWindow;
 
+        private PriceCheckWindow? _priceCheckWindow;
+
         private DateTime? _trayTimeClick;
 
         public override void Initialize()
@@ -38,6 +40,7 @@ namespace ExileToolbox_UI
                 //{
                 //    DataContext = new MainWindowViewModel(),
                 //};
+
             }
 
             base.OnFrameworkInitializationCompleted();
@@ -87,21 +90,5 @@ namespace ExileToolbox_UI
         {
             Environment.Exit(0);
         }
-
-
-        private void OnTrayClicked(object? sender, EventArgs e)
-        {
-            if (_trayTimeClick == null)
-            {
-                _trayTimeClick = DateTime.Now;
-                return;
-            }
-
-            var delta = (DateTime.Now - _trayTimeClick).Value;
-            
-
-
-        }
-
     }
 }

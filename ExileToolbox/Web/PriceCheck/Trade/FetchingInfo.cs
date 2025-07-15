@@ -9,7 +9,7 @@ using System.Text.Json.Serialization;
 
 namespace ExileToolbox.Web.PriceCheck.Trade
 {
-    public class FetchRequest
+    public class FetchingInfo
     {
         [JsonPropertyName("id")]
         public string Id { get; set; }

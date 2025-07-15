@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using ExileToolbox.Web.API.Errors;
 
-namespace ExileToolbox.Web.PriceCheck.Trade
+namespace ExileToolbox.Web.API
 {
-    public class TradeResponse
+    public class APIResponse
     {
         public bool Successful;
         public string Content;

@@ -7,17 +7,17 @@ using System.Windows.Interop;
 using System.Collections.Generic;
 using Microsoft.VisualBasic;
 
+using ExileToolbox.Util;
+using System.Collections.ObjectModel;
+
 namespace ExileToolbox_UI.Views
 {
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
-
-
-
-
 
 
             //this.WindowState = WindowState.Minimized;
@@ -38,8 +38,12 @@ namespace ExileToolbox_UI.Views
             //trayIcon.DoubleClick += (s, e) => ShowFromTray();
 
 
-            
 
+            List<string> tempLeagueList = new List<string>() { "Standard", "Mercenary" };
+
+            LeaguePicker_SetItems(tempLeagueList);
+
+            LeaguePicker.SelectionChanged += (s, e) => LeaguePicker_PropagateSelection(s, e);
 
         }
 
@@ -57,6 +61,25 @@ namespace ExileToolbox_UI.Views
         {
             LeaguePicker.ItemsSource = leagues;
         }
+
+
+        public void LeaguePicker_PropagateSelection(object? sender, SelectionChangedEventArgs e)
+        {
+            UserSettings.SetSelectedLeague(LeaguePicker.SelectedItem.ToString());
+            Debug.WriteLine(LeaguePicker.SelectedItem.ToString());
+        }
+
+
+        public void TESTING_ShowPriceCheckWindow(object? sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public void TESTING_UpdatPriceCheckWindowBinding(object? sender, RoutedEventArgs e)
+        {
+
+        }
+
 
         //private void CalculateButton_OnClick(object? sender, RoutedEventArgs e)
         //{

@@ -18,6 +18,8 @@ using ExileToolbox.Parsing;
 using ExileToolbox.Util;
 using ExileToolbox.Parsing.Types;
 using ExileToolbox.Web.PriceCheck.Trade;
+using ExileToolbox.Web.API;
+using ExileToolbox.Web.API.Schemas;
 
 namespace ExileToolbox
 {
@@ -88,16 +90,16 @@ namespace ExileToolbox
 
             string tradeRequestJson = Helper.TemplateToJsonString(tradeRequestInstance);
 
-            TradeResponse tradeRequestResponse = await tradeClient.PostTradeRequest(tradeRequestJson, Constants.TRADE_API_Search);
+            APIResponse tradeRequestResponse = await tradeClient.PostTradeRequest(tradeRequestJson);
 
             if (!tradeRequestResponse.Successful) //Not successful
             {
                 // Do something based on ErrorMessage, such as adjust timeout period to accommodate for rate limiting
             }
 
-            FetchRequest fetchRequest = JsonSerializer.Deserialize<FetchRequest>(tradeRequestResponse.Content);
+            FetchingInfo fetchingInfo = JsonSerializer.Deserialize<FetchingInfo>(tradeRequestResponse.Content);
 
-            string web_SomeUrl = Helper.FormatTradeSearchUrl(fetchRequest);
+            string web_SomeUrl = Helper.FormatTradeSearchUrl(fetchingInfo);
 
             int numOfTradeListings = 3;
 
@@ -105,9 +107,13 @@ namespace ExileToolbox
 
             for (int i = 0; i < numOfTradeListings; i++)
             {
-                web_SomeTradeFetchUrl = web_SomeTradeFetchUrl + fetchRequest.Result[i] + ",";
+                web_SomeTradeFetchUrl = web_SomeTradeFetchUrl + fetchingInfo.Result[i] + ",";
             }
 
+
+            APIResponse testGetTradeListingsResponseBody = await tradeClient.GetTradeListings(fetchingInfo, 3);
+
+            TradeListings tradeListings = JsonSerializer.Deserialize<TradeListings>(testGetTradeListingsResponseBody.Content);
 
         }
 

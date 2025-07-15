@@ -1,8 +1,11 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Documents;
+
+using ExileToolbox_UI.PresentableTypes;
 
 namespace ExileToolbox_UI.ViewModels
 {
-    public partial class MainWindowViewModel : ViewModelBase
+    public partial class PriceCheckWindowViewModel : ViewModelBase
     {
         public string Greeting { get; } = "Welcome to Avalonia! <-- Testing string";
 
@@ -12,5 +15,8 @@ namespace ExileToolbox_UI.ViewModels
                 "Standard",
                 "Mercenary"
             };
+
+
+        public System.Collections.Generic.List<PT_ItemListing> ptItemListings { get; set; } = new System.Collections.Generic.List<PT_ItemListing>();
     }
 }
