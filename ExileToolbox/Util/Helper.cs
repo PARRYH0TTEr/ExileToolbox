@@ -10,8 +10,8 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using ExileToolbox.Parsing.Types;
 using System.Text.RegularExpressions;
-using ExileToolbox.Web.PriceCheck.Trade;
 using ExileToolbox.Web.API.Schemas;
+using ExileToolbox.PriceCheck.Trade;
 
 namespace ExileToolbox.Util
 {
@@ -29,12 +29,12 @@ namespace ExileToolbox.Util
 
         public static void Init()
         {
-            string statsJSONPath = Path.Combine(AppContext.BaseDirectory, "Web", "API", "Databases", "stats.json");
+            string statsJSONPath = Path.Combine(AppContext.BaseDirectory, "API", "Databases", "stats.json");
             string statsJSONFile = File.ReadAllText(statsJSONPath);
 
             statsJSONDeserialized = JsonSerializer.Deserialize<statsSchema>(statsJSONFile);
 
-            selectedLeague = "Standard";
+            selectedLeague = UserSettings.SelectedLeague;
         }
 
         public static string RemoveAll(string originalString, string[] toBeRemovedSubStrings)
@@ -176,6 +176,20 @@ namespace ExileToolbox.Util
 
 
 
+        // Convenience-method to retrieve the title of the current active window
+        // Used in HotkeyWatcher to only invoke methods if a PoE window is active.
+        public static string GetActiveWindowTitle()
+        {
+            const int nChars = 256;
+            StringBuilder titleBuffer = new StringBuilder();
+            IntPtr activeWindow_Handle = DLLImports.GetForegroundWindow();
+
+            if (DLLImports.GetWindowText(activeWindow_Handle, titleBuffer, nChars) > 0)
+            {
+                return titleBuffer.ToString();
+            }
+            return null;
+        }
 
 
 

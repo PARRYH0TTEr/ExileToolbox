@@ -20,22 +20,32 @@
 	<!--
 	-->
 	<StackPanel>		
-		<ItemsControl ItemsSource="{Binding tempLeagueList2}">
-			<ItemsControl.ItemTemplate>
-				<DataTemplate>
-					<TextBlock Text="{Binding}" Margin="5" Foreground="White"/>
-				</DataTemplate>
-			</ItemsControl.ItemTemplate>		
-		</ItemsControl>
-
-
+		
 		<ItemsControl ItemsSource="{Binding ptItemListings}">
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
-					<TextBlock Text="{Binding}" Margin="5" Foreground="White"/>
+					<TextBlock Text="{Binding}" Margin="5" Foreground="White">
+						<TextBlock.Text>
+							<MultiBinding StringFormat="{}{1} {0}">
+								<Binding Path="Currency"/>
+								<Binding Path="Amount"/>
+							</MultiBinding>
+						</TextBlock.Text>
+					</TextBlock>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
 		</ItemsControl>
+
+
+		<!--
+		<ItemsControl ItemsSource="{Binding ptItemListings}">
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding Currency}" Margin="5" Foreground="White"/>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+		-->
 		
 	</StackPanel>
 	

@@ -86,6 +86,14 @@
 			Set PriceCheck ItemListing Binding
 		</Button>
 
+		<Button Margin="5" Click="TESTING_HotkeyWatcher_Init" Foreground="White">
+			HotkeyWatcher Window Init
+		</Button>
+
+		<Button Margin="5" Click="TESTING_HotkeyWatcher_Cleanup" Foreground="White">
+			HotkeyWatcher Window Cleanup
+		</Button>
+
 		
 	</StackPanel>
 

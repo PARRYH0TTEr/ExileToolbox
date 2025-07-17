@@ -17,6 +17,6 @@ namespace ExileToolbox_UI.ViewModels
             };
 
 
-        public System.Collections.Generic.List<PT_ItemListing> ptItemListings { get; set; } = new System.Collections.Generic.List<PT_ItemListing>();
+        public ObservableCollection<PT_ItemListing> ptItemListings { get; set; } = new ObservableCollection<PT_ItemListing>();
     }
 }

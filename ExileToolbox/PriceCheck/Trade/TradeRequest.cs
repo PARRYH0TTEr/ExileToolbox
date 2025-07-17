@@ -9,7 +9,7 @@ using System.Text.Json.Serialization;
 using System.Security.Cryptography.X509Certificates;
 
 
-namespace ExileToolbox.Web.PriceCheck.Trade
+namespace ExileToolbox.PriceCheck.Trade
 {
     public class TradeRequest
     {

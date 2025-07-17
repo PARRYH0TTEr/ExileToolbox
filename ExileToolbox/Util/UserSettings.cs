@@ -8,10 +8,14 @@ namespace ExileToolbox.Util
 {
     public static class UserSettings
     {
-        private static string _selectedLeague;
+        public static string SelectedLeague;
 
-        public static void SetSelectedLeague(string selectedLeague) { _selectedLeague = selectedLeague; }
-        public static string GetSelectedLeague() {  return _selectedLeague; }
+        public static string SelectedGame;
 
+        static UserSettings()
+        {
+            UserSettings.SelectedLeague = "Standard";
+            UserSettings.SelectedGame = "Path of Exile";
+        }
     }
 }

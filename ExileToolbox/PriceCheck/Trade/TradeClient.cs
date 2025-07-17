@@ -12,7 +12,7 @@ using ExileToolbox.Util;
 using ExileToolbox.Web.API;
 using ExileToolbox.Web.API.Errors;
 
-namespace ExileToolbox.Web.PriceCheck.Trade
+namespace ExileToolbox.PriceCheck.Trade
 {
     public class TradeClient
     {
@@ -34,7 +34,7 @@ namespace ExileToolbox.Web.PriceCheck.Trade
         }
 
 
-        // Return a proper type instead of simply a string, as the string type is only for testing purposes
+        // Retrieve a set of TradeListings from an earlier fetch
         public async Task<APIResponse> GetTradeListings(FetchingInfo fetchingInfo, int numOfListingsToGet)
         {
 
@@ -53,8 +53,6 @@ namespace ExileToolbox.Web.PriceCheck.Trade
                 HttpResponseMessage response = await this.httpClient.GetAsync(urlEndpoint);
 
                 responseBody = await response.Content.ReadAsStringAsync();
-
-                //return responseBody;
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
@@ -103,7 +101,7 @@ namespace ExileToolbox.Web.PriceCheck.Trade
         }
 
 
-        // Sends a POST request to the specified url(endpoint), with a given payload
+        // Sends a POST request to the 'search' api endpoint, with a given payload
         public async Task<APIResponse> PostTradeRequest(string payload)
         {
 

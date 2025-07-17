@@ -17,9 +17,9 @@ using System.Text.Json.Serialization;
 using ExileToolbox.Parsing;
 using ExileToolbox.Util;
 using ExileToolbox.Parsing.Types;
-using ExileToolbox.Web.PriceCheck.Trade;
 using ExileToolbox.Web.API;
 using ExileToolbox.Web.API.Schemas;
+using ExileToolbox.PriceCheck.Trade;
 
 namespace ExileToolbox
 {

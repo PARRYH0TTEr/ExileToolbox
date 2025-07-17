@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace ExileToolbox.Web.PriceCheck.Trade
+namespace ExileToolbox.PriceCheck.Trade
 {
     public class HeaderInfo
     {

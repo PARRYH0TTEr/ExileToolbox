@@ -108,32 +108,4 @@ namespace ExileToolbox.Web.API.Schemas
         [JsonPropertyName("currency")]
         public string Currency { get; set; }
     }
-
-
-
-
-    //public class StatCategory
-    //{
-    //    [JsonPropertyName("id")]
-    //    public string Id { get; set; }
-
-    //    [JsonPropertyName("label")]
-    //    public string Label { get; set; }
-
-    //    [JsonPropertyName("entries")]
-    //    public List<StatEntry> Entries { get; set; }
-    //}
-
-    //public class StatEntry
-    //{
-    //    [JsonPropertyName("id")]
-    //    public string ID { get; set; }
-
-    //    [JsonPropertyName("text")]
-    //    public string Text { get; set; }
-
-    //    [JsonPropertyName("type")]
-    //    public string Type { get; set; }
-    //}
-
 }

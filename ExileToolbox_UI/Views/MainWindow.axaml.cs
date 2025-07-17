@@ -10,6 +10,9 @@ using Microsoft.VisualBasic;
 using ExileToolbox.Util;
 using System.Collections.ObjectModel;
 
+using ExileToolbox_UI.ViewModels;
+using System;
+
 namespace ExileToolbox_UI.Views
 {
     public partial class MainWindow : Window
@@ -45,6 +48,9 @@ namespace ExileToolbox_UI.Views
 
             LeaguePicker.SelectionChanged += (s, e) => LeaguePicker_PropagateSelection(s, e);
 
+
+            HotkeyWatcher.HotKey_CtrlA += () => Debug.WriteLine("Delegate method invoked!");
+
         }
 
         // Overwriting the OnClosing event to instead minimize the application window to the system tray
@@ -65,52 +71,43 @@ namespace ExileToolbox_UI.Views
 
         public void LeaguePicker_PropagateSelection(object? sender, SelectionChangedEventArgs e)
         {
-            UserSettings.SetSelectedLeague(LeaguePicker.SelectedItem.ToString());
+            //UserSettings.SetSelectedLeague(LeaguePicker.SelectedItem.ToString());
+            UserSettings.SelectedLeague = LeaguePicker.SelectedItem.ToString();
             Debug.WriteLine(LeaguePicker.SelectedItem.ToString());
         }
 
 
         public void TESTING_ShowPriceCheckWindow(object? sender, RoutedEventArgs e)
         {
+            ((App)App.Current)._priceCheckWindow = new PriceCheckWindow()
+            {
+                DataContext = new PriceCheckWindowViewModel()
+            };
+
+            ((App)App.Current)._priceCheckWindow.Show();
 
         }
 
         public void TESTING_UpdatPriceCheckWindowBinding(object? sender, RoutedEventArgs e)
         {
 
+            var vm = ((PriceCheckWindowViewModel)((App)App.Current)._priceCheckWindow.DataContext);
+
+            vm.ptItemListings.Clear();
+
+            Random random = new Random();
+
+            vm.ptItemListings.Add(new PresentableTypes.PT_ItemListing{ Amount = (float)random.Next(1, 11), Currency = "Exalted Orb" });
+            vm.ptItemListings.Add(new PresentableTypes.PT_ItemListing{ Amount = (float)random.Next(1, 11), Currency = "Exalted Orb" });
+
         }
 
 
-        //private void CalculateButton_OnClick(object? sender, RoutedEventArgs e)
-        //{
-        //    Debug.WriteLine("Click!");
-        //    Debug.WriteLine($"Click! Celsius={Celsius.Text}");
 
-        //    if (Celsius.Text != string.Empty)
-        //    {
-        //        Fahrenheit.Text = Celsius.Text;
-        //    }
-        //    else
-        //    {
-        //        Celsius.Text = string.Empty;
-        //        Fahrenheit.Text = string.Empty;
-        //    }
-        //}
+        public void TESTING_HotkeyWatcher_Init(object? sender, RoutedEventArgs e) { HotkeyWatcher.HotkeyWatcherWindow_Init(); }
 
-        //private void CalculateTemp(object? sender, RoutedEventArgs e)
-        //{
-        //    if (double.TryParse(Celsius.Text, out var C))
-        //    {
-        //        var F = C * (9d / 5d) + 32;
-        //        Fahrenheit.Text = F.ToString("0.0");
-        //    }
-        //    else
-        //    {
-        //        Celsius.Text = string.Empty;
-        //        Fahrenheit.Text= string.Empty;
-        //    }
-        //}
 
+        public void TESTING_HotkeyWatcher_Cleanup(object? sender, RoutedEventArgs e) { HotkeyWatcher.HotkeyWatcherWindow_Cleanup(); }
 
     }
-}
+}   

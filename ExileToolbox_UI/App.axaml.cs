@@ -17,9 +17,9 @@ namespace ExileToolbox_UI
 
         private MainWindow? _mainWindow;
 
-        private PriceCheckWindow? _priceCheckWindow;
+        //private PriceCheckWindow? _priceCheckWindow;
 
-        private DateTime? _trayTimeClick;
+        public PriceCheckWindow? _priceCheckWindow { get; set; }
 
         public override void Initialize()
         {
@@ -39,7 +39,12 @@ namespace ExileToolbox_UI
                 //desktop.MainWindow = new MainWindow
                 //{
                 //    DataContext = new MainWindowViewModel(),
+                //    WindowState = Avalonia.Controls.WindowState.Minimized,
+                //    ShowInTaskbar = false
                 //};
+
+                // Need to set this so the app won't exit prematurely
+                desktop.ShutdownMode = Avalonia.Controls.ShutdownMode.OnExplicitShutdown;
 
             }
 
@@ -58,7 +63,6 @@ namespace ExileToolbox_UI
                 BindingPlugins.DataValidators.Remove(plugin);
             }
         }
-
 
         // Show (and initialize) the ExileToolbox window
         private void SystemTray_SettingsClick(object? sender, System.EventArgs e)
