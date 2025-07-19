@@ -22,26 +22,6 @@ namespace ExileToolbox_UI.Views
         {
             InitializeComponent();
 
-
-            //this.WindowState = WindowState.Minimized;
-
-
-            //trayIcon = new NotifyIcon()
-            //{
-            //    Icon = new System.Drawing.Icon("Assets/ExileToolboxLogo_SystemTray.ico"),
-            //    Visible = true,
-            //    Text = "Exile Toolbox"
-            //};
-
-            //var trayIcon_ContextMenu = new ContextMenuStrip();
-            //trayIcon_ContextMenu.Items.Add("Show", null, (s, e) => ShowFromTray());
-            //trayIcon_ContextMenu.Items.Add("Exit", null, (s, e) => ExitApp());
-            //trayIcon.ContextMenuStrip = trayIcon_ContextMenu;
-
-            //trayIcon.DoubleClick += (s, e) => ShowFromTray();
-
-
-
             List<string> tempLeagueList = new List<string>() { "Standard", "Mercenary" };
 
             LeaguePicker_SetItems(tempLeagueList);
@@ -49,7 +29,7 @@ namespace ExileToolbox_UI.Views
             LeaguePicker.SelectionChanged += (s, e) => LeaguePicker_PropagateSelection(s, e);
 
 
-            HotkeyWatcher.HotKey_CtrlA += () => Debug.WriteLine("Delegate method invoked!");
+            HotkeyWatcher.Hotkey_CtrlD += () => Debug.WriteLine("Delegate method invoked!");
 
         }
 
@@ -108,6 +88,14 @@ namespace ExileToolbox_UI.Views
 
 
         public void TESTING_HotkeyWatcher_Cleanup(object? sender, RoutedEventArgs e) { HotkeyWatcher.HotkeyWatcherWindow_Cleanup(); }
+
+
+
+
+        public void TESTING_ClipboardWrapperWindow_Init(object? sender, RoutedEventArgs e) { ClipboardWrapper.ClipboardWrapperWindow_Init(); }
+
+
+        public void TESTING_ClipboardWrapperWindow_Cleanup(object? sender, RoutedEventArgs e) { ClipboardWrapper.ClipboardWrapperWindow_Cleanup(); }
 
     }
 }   

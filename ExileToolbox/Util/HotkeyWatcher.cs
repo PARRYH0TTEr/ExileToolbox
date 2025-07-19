@@ -10,33 +10,22 @@ using System.Windows.Interop;
 using System.Windows.Forms;
 using System.Windows.Input;
 using ExileToolbox.PriceCheck;
+using System.Security.Cryptography;
+using System.Runtime.InteropServices;
 
 namespace ExileToolbox.Util
 {
     public static class HotkeyWatcher
     {
         //TODO: Enable the user to register arbitrary keyboard combinations/hotkeys by implementing a register method.
-        public static event Action HotKey_CtrlA;
-
-        private static Thread _thread;
-        private static bool _running;
-
-        //private static Window _hotkeyWindow;
-        //private static WindowInteropHelper _windowInteropHelper;
-        //private static IntPtr _hotkeyWindowHandle;
-
-        //private static NativeWindow _hotkeyWindow;
+        public static event Action Hotkey_CtrlD;
 
         private static HotkeyWatcherWindow _hotkeyWindow;
 
-        // Might want to make the bitmask larger, i.e. by setting it to a larger data type
-        private static uint _hotkeyBitmask = 0;
-        private static bool _isHotkeyBeingHeld = false;
+        static HotkeyWatcher()
+        {
 
-        private const int VK_Ctrl = 0x11;
-        private const int VK_A = 0X41;
-
-
+        }
 
 
         // NativeWindow class whose only purpose is to receive a WM_HOTKEY window-message.
@@ -55,7 +44,7 @@ namespace ExileToolbox.Util
                 if (m.Msg == WM_HOTKEY)
                 {
 
-                    HandleHotkey(m);
+                    HandleHotkeyEvent(m);
 
                     //int id = m.WParam.ToInt32();
                     //int lParamInt = m.LParam.ToInt32();
@@ -91,8 +80,11 @@ namespace ExileToolbox.Util
             }
         }
 
-        public static void HandleHotkey(Message message)
+        public static void HandleHotkeyEvent(Message message)
         {
+            // https://learn.microsoft.com/en-us/windows/win32/inputdev/wm-hotkey
+            // 
+            // Perhaps make this code more clear with separate expressions/statements instead of inlining the computations
             int lParamInt = message.LParam.ToInt32();
             Keys virtualKey = (Keys)(lParamInt >> 16);
             ModKeys modifierKey = (ModKeys)(lParamInt & 0xFFFF);
@@ -100,18 +92,24 @@ namespace ExileToolbox.Util
             switch((modifierKey, virtualKey))
             {
                 case (ModKeys.Control, Keys.D):
-                    if (Helper.GetActiveWindowTitle() == UserSettings.SelectedGame)
+                    if (Helper.GetActiveWindowTitle().Equals(UserSettings.SelectedGame))
                     {
                         //PriceChecker.InitiatePriceCheck();
                         //Debug.WriteLine(ClipboardWrapper.GetTopmostClipboardText());
 
+                        //Debug.WriteLine("hit ctrlD");
+
+                        CopyIngameItemText();
+
+                        Hotkey_CtrlD.Invoke();
+
                         string clipboardText = string.Empty;
 
-                        Debug.WriteLine(ClipboardWrapper.EnsureParseableItem(out clipboardText).ToString());
+                        //Debug.WriteLine(ClipboardWrapper.EnsureParseableItem(out clipboardText).ToString());
 
                         if (clipboardText != null && clipboardText != string.Empty)
                         {
-                            Debug.WriteLine(clipboardText);
+                            //Debug.WriteLine(clipboardText);
                         }
 
                     }
@@ -122,17 +120,35 @@ namespace ExileToolbox.Util
         }
 
 
-
-        // Sets the bit associated with the given virtual key received
-        public static void SetHotkeyBitmask(VirtualKeys vkb)
+        public static void CopyIngameItemText()
         {
-            _hotkeyBitmask |= (uint)vkb;
-        }
 
-        // Zeros the bit associated with the given virtual key received
-        public static void RemoveHotkeyBitmask(VirtualKeys vkb)
-        {
-            _hotkeyBitmask &= ~(uint)vkb;
+            if (Helper.GetActiveWindowTitle().Equals(UserSettings.SelectedGame))
+            {
+
+                InputSender.Input[] inputs =
+                {
+                    //InputSender.PressKey(VirtualKeys.Control),
+                    InputSender.PressKey(VirtualKeys.Menu),
+                    InputSender.PressKey(VirtualKeys.C),
+                    //InputSender.ReleaseKey(VirtualKeys.Control),
+                    InputSender.ReleaseKey(VirtualKeys.Menu),
+                    InputSender.ReleaseKey(VirtualKeys.C)
+                };
+
+                uint SendInputResult = DLLImports.SendInput((uint)inputs.Length, inputs, Marshal.SizeOf(typeof(InputSender.Input)));
+
+                if (SendInputResult == 0)
+                {
+                    Debug.WriteLine("SendInput failed, something went wrong...");
+                    throw new Exception("SendInput failed. Win32 Error Code: " + Marshal.GetLastWin32Error());
+                }
+                else
+                {
+                    Debug.WriteLine("SendInput succeeded! Ctrl+Alt+C sent to game!");
+
+                }
+            }
         }
     }
 }

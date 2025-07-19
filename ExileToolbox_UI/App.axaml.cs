@@ -7,6 +7,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using ExileToolbox.Util;
 using ExileToolbox_UI.ViewModels;
 using ExileToolbox_UI.Views;
 
@@ -93,6 +94,9 @@ namespace ExileToolbox_UI
         private void SystemTray_ExitClick(object? sender, System.EventArgs e)
         {
             Environment.Exit(0);
+            // Clean your shit up!
+            HotkeyWatcher.HotkeyWatcherWindow_Cleanup();
+            ClipboardWrapper.ClipboardWrapperWindow_Cleanup();
         }
     }
 }

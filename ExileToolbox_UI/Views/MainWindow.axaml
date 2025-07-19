@@ -94,7 +94,15 @@
 			HotkeyWatcher Window Cleanup
 		</Button>
 
-		
+		<Button Margin="20" Click="TESTING_ClipboardWrapperWindow_Init" Foreground="White">
+			ClipboardWrapper Window Init
+		</Button>
+
+		<Button Margin="5" Click="TESTING_ClipboardWrapperWindow_Cleanup" Foreground="White">
+			ClipboardWrapper Window Cleanup
+		</Button>
+
+
 	</StackPanel>
 
 

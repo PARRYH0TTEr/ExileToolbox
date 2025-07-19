@@ -14,6 +14,8 @@ namespace ExileToolbox.Util
 
         static UserSettings()
         {
+            //TODO: don't set these constant values in the constructor, but rather from when an event is raised by the user
+            // perhaps when selecting an item from a drop-down?
             UserSettings.SelectedLeague = "Standard";
             UserSettings.SelectedGame = "Path of Exile";
         }
