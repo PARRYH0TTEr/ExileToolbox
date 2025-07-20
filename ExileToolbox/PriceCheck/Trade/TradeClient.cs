@@ -26,7 +26,7 @@ namespace ExileToolbox.PriceCheck.Trade
         {
             this.httpClient = new HttpClient();
 
-            string headerInfoFilePath = Path.Combine(AppContext.BaseDirectory, "Web", "PriceCheck", "Trade", "header.json");
+            string headerInfoFilePath = Path.Combine(AppContext.BaseDirectory, "PriceCheck", "Trade", "header.json");
 
             HeaderInfo headerInfo = JsonSerializer.Deserialize<HeaderInfo>(File.ReadAllText(headerInfoFilePath));
 

@@ -145,8 +145,7 @@ namespace ExileToolbox.Util
                 }
                 else
                 {
-                    Debug.WriteLine("SendInput succeeded! Ctrl+Alt+C sent to game!");
-
+                    //Debug.WriteLine("SendInput succeeded! Ctrl+Alt+C sent to game!");
                 }
             }
         }

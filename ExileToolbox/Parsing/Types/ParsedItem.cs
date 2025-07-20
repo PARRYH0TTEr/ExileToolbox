@@ -28,6 +28,8 @@ namespace ExileToolbox.Parsing.Types
         public double? weaponAPS;
         public double? weaponRELOADTIME;
         public int? weaponSPIRIT;
+        public double? weaponPHYSICALDPS;
+        public double? weaponELEMENTALDPS;
 
         public int? sockets;
 
@@ -55,6 +57,8 @@ namespace ExileToolbox.Parsing.Types
             this.weaponAPS = null;
             this.weaponRELOADTIME = null;
             this.weaponSPIRIT = null;
+            this.weaponPHYSICALDPS = null;
+            this.weaponELEMENTALDPS = null;
 
             this.sockets = null;
 
@@ -81,6 +85,8 @@ namespace ExileToolbox.Parsing.Types
             this.weaponAPS = other.weaponAPS;
             this.weaponRELOADTIME = other.weaponRELOADTIME;
             this.weaponSPIRIT = other.weaponSPIRIT;
+            this.weaponPHYSICALDPS = other.weaponPHYSICALDPS;
+            this.weaponELEMENTALDPS = other.weaponELEMENTALDPS;
 
             this.sockets = other.sockets;
 

@@ -85,6 +85,7 @@ namespace ExileToolbox
             //string requestUrl = $"{tradeAPIUrl}?q={encodedPayload}";
 
             ParsedItemReturnContainer pIRContainer = Parser.ParseItem(Constants.TESTING_ITEM_UniqueHelmet);
+            //ParsedItemReturnContainer pIRContainer = Parser.ParseItem(Constants.TESTING_ITEM_Quarterstaff);
 
             TradeRequest tradeRequestInstance = Helper.MapParsedItemToTradeRequest(pIRContainer.parsedItemCopy);
 

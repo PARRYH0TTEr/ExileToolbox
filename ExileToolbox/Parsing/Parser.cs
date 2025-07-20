@@ -27,7 +27,8 @@ namespace ExileToolbox.Parsing
             ParseExplicits
         };
 
-        // 
+        // TODO: Adjusting the parser such that it works for advanced mod descriptions (Ctrl+Alt+C).
+        //  At the moment, it only works for regular mod descriptions (Ctrl+C)
         public static ParsedItemReturnContainer ParseItem(string item)
         {
 
